@@ -14,3 +14,9 @@ export class UserModel {
   @Field()
   salt: string;
 }
+
+@ObjectType('Token')
+export class TokenModel {
+  @Field()
+  accessToken: string;
+}

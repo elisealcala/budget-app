@@ -1,14 +1,17 @@
 import { User } from '.prisma/client';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma.service';
 import { AuthRepository } from './auth.repository';
 import { AuthCredentialsInput } from './dto/credentials.input';
+import { JwtPayload } from './types/jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
     private prismaService: PrismaService,
     private authRepository: AuthRepository,
+    private jwtService: JwtService,
   ) {}
 
   async getAllUsers(): Promise<User[]> {
@@ -19,21 +22,21 @@ export class AuthService {
     return this.authRepository.signUp(authCredentialsInput);
   }
 
-  // async signIn(
-  //   authCredentialsDto: AuthCredentialsDto,
-  // ): Promise<{ accessToken: string }> {
-  //   const username = await this.authRepository.validateUserPassword(
-  //     authCredentialsDto,
-  //   );
+  async signIn(
+    authCredentialsInput: AuthCredentialsInput,
+  ): Promise<{ accessToken: string }> {
+    const username = await this.authRepository.validateUserPassword(
+      authCredentialsInput,
+    );
 
-  //   if (!username) {
-  //     throw new UnauthorizedException('Invalid credentials');
-  //   }
+    if (!username) {
+      throw new UnauthorizedException('Invalid credentials');
+    }
 
-  //   const payload: JwtPayload = { username };
+    const payload: JwtPayload = { username };
 
-  //   const accessToken = this.jwtService.sign(payload);
+    const accessToken = this.jwtService.sign(payload);
 
-  //   return { accessToken };
-  // }
+    return { accessToken };
+  }
 }
