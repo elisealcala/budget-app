@@ -1,5 +1,5 @@
 import { Resolver, Mutation, Args } from '@nestjs/graphql';
-import { AccountModel } from './account.model';
+import { Account } from 'src/graphql.schema';
 import { AccountsService } from './accounts.service';
 import { AccountVariablesInput } from './input/variables.input';
 
@@ -7,7 +7,7 @@ import { AccountVariablesInput } from './input/variables.input';
 export class AccountsResolver {
   constructor(private accountService: AccountsService) {}
 
-  @Mutation(() => AccountModel)
+  @Mutation(() => Account)
   createAccount(
     @Args('accountVariables') accountVariables: AccountVariablesInput,
   ) {

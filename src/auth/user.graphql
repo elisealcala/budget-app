@@ -1,0 +1,24 @@
+type User {
+  id: ID
+  username: String
+  password: String
+  salt: String
+}
+
+type Token {
+  accessToken: String
+}
+
+input AuthCredentialsInput {
+  username: String
+  password: String
+}
+
+type Query {
+  users: [User]
+}
+
+type Mutation {
+  signUp(authCredentials: AuthCredentialsInput): User
+  signIn(authCredentials: AuthCredentialsInput): Token
+}

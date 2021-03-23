@@ -1,0 +1,27 @@
+scalar Decimal
+scalar BigNumber
+
+type Currency {
+  iso: String
+  name: String
+}
+
+type Account {
+  id: ID
+  name: String
+  active: Boolean
+  openingAmount: BigNumber
+  mainCurrency: Currency
+}
+
+input AccountVariablesInput {
+  name: String
+  active: Boolean
+  openingAmount: Float
+  currencyIso: String
+}
+
+type Mutation { 
+  createAccount(accountVariables: AccountVariablesInput): Account
+}
+
