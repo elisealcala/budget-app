@@ -3,14 +3,37 @@ generator client {
 }
 
 model User {
-  id  String @id @default(uuid())
+  id       String @id @default(uuid())
   username String @unique
   password String
-  salt String
+  salt     String
+}
+
+model Currency {
+  iso               String              @id @db.Char(3)
+  name              String              @unique @db.VarChar(200)
+  account           Account[]
+  accountCurrencies AccountCurrencies[]
+}
+
+model Account {
+  id              String             @id @default(uuid())
+  name            String
+  active          Boolean
+  openingAmount   Decimal            @db.Decimal(12, 2)
+  mainCurrencyIso String             @db.Char(3) @map("Currency")
+  mainCurrency    Currency           @relation(fields: [mainCurrencyIso], references: [iso])
+  currencies      AccountCurrencies?
+}
+
+model AccountCurrencies {
+  id         String     @id @default(uuid())
+  accountId  String
+  account    Account    @relation(fields: [accountId], references: [id])
+  currencies Currency[]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-

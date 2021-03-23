@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-
 import { PrismaService } from './prisma.service';
 import { AuthModule } from './auth/auth.module';
+import { AccountsModule } from './accounts/accounts.module';
 
 @Module({
   imports: [
@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
       autoSchemaFile: true,
     }),
     AuthModule,
+    AccountsModule,
   ],
   controllers: [],
   providers: [PrismaService],
