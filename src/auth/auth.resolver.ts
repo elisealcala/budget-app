@@ -8,7 +8,7 @@ export class AuthResolver {
   constructor(private userService: AuthService) {}
 
   @Query(() => [UserModel])
-  users(): Promise<UserModel[]> {
+  users() {
     return this.userService.getAllUsers();
   }
 
