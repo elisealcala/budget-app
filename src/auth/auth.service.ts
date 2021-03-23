@@ -1,6 +1,6 @@
-import { User } from '.prisma/client';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { User } from 'src/graphql.schema';
 import { PrismaService } from 'src/prisma.service';
 import { AuthRepository } from './auth.repository';
 import { AuthCredentialsInput } from './dto/credentials.input';

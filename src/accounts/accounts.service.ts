@@ -1,5 +1,6 @@
-import { Account, Prisma } from '.prisma/client';
+import { Prisma } from '.prisma/client';
 import { Injectable } from '@nestjs/common';
+import { Account } from 'src/graphql.schema';
 import { PrismaService } from 'src/prisma.service';
 
 @Injectable()

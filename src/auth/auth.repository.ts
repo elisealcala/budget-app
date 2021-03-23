@@ -1,10 +1,10 @@
-import { User } from '.prisma/client';
 import {
   ConflictException,
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
+import { User } from 'src/graphql.schema';
 import { PrismaService } from 'src/prisma.service';
 import { AuthCredentialsInput } from './dto/credentials.input';
 
