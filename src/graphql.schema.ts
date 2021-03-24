@@ -1,3 +1,4 @@
+
 /** ------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
  * -------------------------------------------------------
@@ -5,6 +6,12 @@
 
 /* tslint:disable */
 /* eslint-disable */
+export enum TransactionType {
+    EXPENSES = "EXPENSES",
+    INCOMES = "INCOMES",
+    TRANSFER = "TRANSFER"
+}
+
 export class AccountVariablesInput {
     name?: string;
     active?: boolean;
@@ -15,6 +22,14 @@ export class AccountVariablesInput {
 export class AuthCredentialsInput {
     username?: string;
     password?: string;
+}
+
+export class CreateTransactionInput {
+    amount?: number;
+    type?: TransactionType;
+    date?: string;
+    accountId?: string;
+    currencyIso?: string;
 }
 
 export class Currency {
@@ -36,6 +51,14 @@ export abstract class IMutation {
     abstract signUp(authCredentials?: AuthCredentialsInput): User | Promise<User>;
 
     abstract signIn(authCredentials?: AuthCredentialsInput): Token | Promise<Token>;
+
+    abstract createTransaction(createTransactionInput?: CreateTransactionInput): Transaction | Promise<Transaction>;
+}
+
+export abstract class IQuery {
+    abstract getAccounts(): Account[] | Promise<Account[]>;
+
+    abstract users(): User[] | Promise<User[]>;
 }
 
 export class User {
@@ -49,9 +72,14 @@ export class Token {
     accessToken?: string;
 }
 
-export abstract class IQuery {
-    abstract users(): User[] | Promise<User[]>;
+export class Transaction {
+    id?: string;
+    amount?: BigNumber;
+    active?: boolean;
+    date?: Date;
+    type?: TransactionType;
+    account?: Account;
+    currency?: Currency;
 }
 
-export type Decimal = any;
 export type BigNumber = any;

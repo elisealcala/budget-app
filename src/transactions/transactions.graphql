@@ -1,0 +1,32 @@
+#import "../accounts/accounts.graphql"
+
+scalar BigNumber
+scalar Date
+
+enum TransactionType {
+  EXPENSES
+  INCOMES
+  TRANSFER
+}
+
+type Transaction {
+  id: ID
+  amount: BigNumber
+  active: Boolean
+  date: Date
+  type: TransactionType
+  account: Account
+  currency: Currency
+}
+
+input CreateTransactionInput {
+  amount: Float
+  type: TransactionType
+  date: String
+  accountId: String
+  currencyIso: String
+}
+
+type Mutation {
+  createTransaction(createTransactionInput:CreateTransactionInput): Transaction
+}
