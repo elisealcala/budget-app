@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { Account } from 'src/graphql.schema';
 import { AccountsService } from './accounts.service';
 import { AccountVariablesInput } from './input/variables.input';
@@ -23,5 +23,10 @@ export class AccountsResolver {
       },
       openingAmount,
     });
+  }
+
+  @Query(() => [Account])
+  getAccounts() {
+    return this.accountService.getAllAccounts();
   }
 }

@@ -15,4 +15,8 @@ export class AccountsService {
       },
     });
   }
+
+  async getAllAccounts(): Promise<Account[]> {
+    return this.prismaService.account.findMany();
+  }
 }

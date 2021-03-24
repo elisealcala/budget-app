@@ -25,3 +25,6 @@ type Mutation {
   createAccount(accountVariables: AccountVariablesInput): Account
 }
 
+type Query {
+  getAccounts: [Account]
+}
